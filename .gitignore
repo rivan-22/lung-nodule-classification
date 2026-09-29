@@ -1,0 +1,65 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Editors
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Raw DICOM
+*.dcm
+*.dicom
+
+# Raw dataset
+dataset/01_raw/
+dataset/raw/
+
+# Generated dataset
+dataset/03_crops/
+dataset/04_preprocessed/
+
+# Temporary files
+dataset/tmp/
+dataset/temp/
+
+# Models
+models/
+
+# Results
+results/
+
+# Logs
+logs/
+
+# ML model files
+*.h5
+*.hdf5
+*.keras
+*.pth
+*.pt
+*.ckpt
+
+# Environment / secrets
+.env
+.env.*
+
+# Excel temporary files
+~$*.xlsx
+~$*.xls
+
+# LIDC XML raw annotations
+dataset/02_annotations/LIDC-XML-only/
