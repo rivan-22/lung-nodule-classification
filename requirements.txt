@@ -1,0 +1,64 @@
+# ============================================================
+# PREPROCESSING + MODEL - LIDC-IDRI / DenseNet121
+# ============================================================
+#
+# Versi di-pin. Alasannya bukan sekadar kebiasaan: preprocessing resmi
+# DenseNet121 di Keras berubah beberapa kali antar versi, dan kesalahan di sini
+# akan merusak seluruh preprocessing tanpa error yang terlihat.
+# Verifikasi jalur preprocessing ada di notebooks/01_preprocessing.ipynb,
+# Cell 15.
+#
+# Instalasi (macOS / Linux):
+#   python3 -m venv .venv
+#   .venv/bin/python -m pip install -r requirements.txt
+#   .venv/bin/python -m jupyter lab
+#
+# Instalasi (Windows / PC Lab):
+#   python -m venv .venv
+#   .venv\Scripts\python -m pip install -r requirements.txt
+#   .venv\Scripts\python -m jupyter lab
+#
+# ------------------------------------------------------------
+# CATATAN pylidc
+# ------------------------------------------------------------
+# pylidc SENGAJA tidak ada di requirements.txt.
+#
+#  1. Pipeline preprocessing tidak membutuhkan pylidc, karena master
+#     annotation sudah tersedia di:
+#     dataset/02_annotations/pylidc_nodules_extracted.xlsx
+#
+#  2. pylidc membutuhkan file annotation XML LIDC di:
+#     dataset/02_annotations/LIDC-XML-only/
+#     Folder ini di-ignore Git dan TIDAK ikut di repository,
+#     sehingga pylidc tidak bisa dipakai di laptop.
+#
+#  3. pylidc 0.2.3 tidak kompatibel dengan NumPy >= 1.24
+#     (np.int dihapus) dan belum mendukung pydicom 3.x.
+#     Memasangnya akan memaksa NumPy diturunkan dan berisiko merusak
+#     dependensi lain.
+#
+# Detail: notebooks/01_preprocessing.ipynb, sel "CATATAN LINGKUNGAN"
+# ============================================================
+
+# --- inti preprocessing ---
+numpy==2.2.6
+pandas==2.2.3
+pydicom==3.0.1
+openpyxl==3.1.5
+scipy==1.14.1
+scikit-image==0.24.0
+matplotlib==3.9.4
+
+# --- model: DenseNet121 + bobot ImageNet (TensorFlow / Keras) ---
+# tensorflow 2.21.0 memerlukan numpy >= 1.26; numpy di-pin di 2.2.6
+# dan tidak berubah ketika tensorflow dipasang.
+tensorflow==2.21.0
+keras==3.15.1
+
+# --- Jupyter ---
+jupyterlab==4.3.4
+nbconvert==7.16.6
+ipykernel==6.29.5
+
+# --- unduh sample DICOM dari IDC (opsional, hanya 1-3 series) ---
+idc-index==0.12.5
