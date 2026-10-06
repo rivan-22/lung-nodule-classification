@@ -1,0 +1,6 @@
+Fold,Train Samples,Val Samples,Train Benign,Train Malignant,Val Benign,Val Malignant,Train Patients,Val Patients,Train %Malignant,Val %Malignant,Val %Benign
+1,442,82,324,118,57,25,185,40,26.7,30.49,69.51
+2,398,126,287,111,94,32,178,47,27.89,25.4,74.6
+3,418,106,307,111,74,32,179,46,26.56,30.19,69.81
+4,427,97,312,115,69,28,180,45,26.93,28.87,71.13
+5,411,113,294,117,87,26,178,47,28.47,23.01,76.99

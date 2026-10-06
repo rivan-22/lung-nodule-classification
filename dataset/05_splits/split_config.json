@@ -1,0 +1,36 @@
+{
+  "source_annotation": "dataset\\02_annotations\\pylidc_nodules_extracted.xlsx",
+  "generated_by": "notebooks/02_dataset_preparation.ipynb",
+  "strategy": "StratifiedGroupKFold",
+  "n_splits": 5,
+  "shuffle": true,
+  "random_state": 42,
+  "grouping_variable": "PatientID",
+  "x_column_used": "tidak dipakai sklearn; metadata baris annotation",
+  "y_column": "LabelBinary",
+  "label_rule": {
+    "benign": "MeanMalignancy <= 2.5",
+    "exclude": "2.5 < MeanMalignancy < 3.5",
+    "malignant": "MeanMalignancy >= 3.5",
+    "excluded_from_dataset": "Exclude",
+    "binary_map": {
+      "Benign": 0,
+      "Malignant": 1
+    }
+  },
+  "nodule_cluster_id_source": "NoduleClusterID <- NoduleID (file sumber tidak punya kolom NoduleClusterID)",
+  "counts": {
+    "total_candidates": 524,
+    "benign": 381,
+    "malignant": 143,
+    "patients": 225,
+    "series": 225,
+    "nodules": 524
+  },
+  "oversampling": "tidak dilakukan pada tahap ini",
+  "outputs": {
+    "manifest": "nodule_manifest.csv",
+    "fold_assignments": "fold_assignments.csv",
+    "fold_summary": "fold_summary.csv"
+  }
+}
