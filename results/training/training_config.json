@@ -1,0 +1,115 @@
+{
+  "random_seed": 42,
+  "n_splits": 5,
+  "grouping": "PatientID",
+  "input_shape": [
+    224,
+    224,
+    3
+  ],
+  "input_already_preprocessed": true,
+  "preprocessing_note": "File .npy sudah melalui tf.keras.applications.densenet.preprocess_input. JANGAN preprocess lagi.",
+  "model": {
+    "backbone": "DenseNet121",
+    "include_top": false,
+    "weights": "imagenet",
+    "head": [
+      "GlobalAveragePooling2D",
+      "Dense(1, sigmoid)"
+    ],
+    "total_params_stage1": 7038529,
+    "trainable_params_stage1": 1025
+  },
+  "stage1": {
+    "frozen": true,
+    "epochs": 15,
+    "learning_rate": 0.001,
+    "optimizer": "adam",
+    "trainable_params": 1025
+  },
+  "stage2": {
+    "fine_tune_last_n_layers": 30,
+    "epochs": 20,
+    "learning_rate": 1e-05,
+    "optimizer": "adam"
+  },
+  "loss": "binary_crossentropy",
+  "metrics": [
+    "accuracy"
+  ],
+  "batch_size": 32,
+  "class_weight_per_fold": {
+    "1": {
+      "0": 0.6820987654320988,
+      "1": 1.8728813559322033
+    },
+    "2": {
+      "0": 0.6933797909407665,
+      "1": 1.7927927927927927
+    },
+    "3": {
+      "0": 0.6807817589576547,
+      "1": 1.882882882882883
+    },
+    "4": {
+      "0": 0.6842948717948718,
+      "1": 1.8565217391304347
+    },
+    "5": {
+      "0": 0.6989795918367347,
+      "1": 1.7564102564102564
+    }
+  },
+  "class_weight_formula": "N_train / (2 * N_class_train), per training fold",
+  "augmentation": {
+    "enabled": true,
+    "scope": "training only",
+    "flip_horizontal": true,
+    "rotation_deg": 10.0,
+    "zoom_range": [
+      -0.1,
+      0.1
+    ],
+    "vertical_flip": false,
+    "shear": false,
+    "elastic": false
+  },
+  "callbacks": {
+    "early_stopping": {
+      "monitor": "val_loss",
+      "patience": 5,
+      "mode": "min"
+    },
+    "reduce_lr_on_plateau": {
+      "monitor": "val_loss",
+      "patience": 3,
+      "factor": 0.5
+    },
+    "model_checkpoint": {
+      "save_best_only": true,
+      "save_weights_only": true
+    }
+  },
+  "library_versions": {
+    "python": "3.12.13",
+    "tensorflow": "2.21.0",
+    "keras": "3.15.1",
+    "numpy": "2.2.6",
+    "pandas": "2.2.3",
+    "scikit-learn": "1.6.1"
+  },
+  "gpu": {
+    "name": "/physical_device:GPU:0",
+    "count": 1,
+    "device_details": {
+      "compute_capability": [
+        8,
+        9
+      ],
+      "device_name": "NVIDIA GeForce RTX 4070"
+    },
+    "memory_growth": true
+  },
+  "models_dir": "models/densenet121",
+  "results_dir": "results/training"
+}

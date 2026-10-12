@@ -1,0 +1,60 @@
+{
+  "source_manifest": "dataset/05_splits/nodule_manifest.csv",
+  "dicom_root": "dataset/01_raw",
+  "window_center_hu": -600.0,
+  "window_width_hu": 1500.0,
+  "window_hu_min": -1350.0,
+  "window_hu_max": 150.0,
+  "window_adaptive": false,
+  "scaling": "ke [0, 1] setelah window",
+  "margin_mm": 5.0,
+  "margin_unit": "mm (dikonversi per-axis ke pixel)",
+  "margin_conversion": "ceil(mm / row_spacing) dan ceil(mm / col_spacing) - TIDAK memakai rata-rata",
+  "margin_decision_reason": "Nodul median 45% dari luas crop; upsample median x7.7 ke 224; hanya 5.9% sample butuh >=10x upsample (dibanding 47.7% pada 3 mm dan 79.0% pada 0 mm). Konteks parenkim dan pembuluh darah sekitar nodul tetap terlihat. Clipping 0% karena jarak minimum bbox ke tepi FOV 21.9 mm.",
+  "margin_selected_by": "audit empiris 524 sample, bukan performa model",
+  "resize_size": [
+    224,
+    224
+  ],
+  "resize_method": "skimage.transform.resize order=1, mode=reflect, anti_aliasing=True, preserve_range=True",
+  "channel_layout": "channels_last",
+  "num_channels": 3,
+  "channel_mode": "replikasi grayscale (kanal 0 = 1 = 2)",
+  "densenet_preprocessing": "tf.keras.applications.densenet.preprocess_input",
+  "densenet_preprocessing_data_format": "channels_last",
+  "densenet_preprocessing_arg": "input_3ch * 255.0",
+  "WARNING_preprocessing": "File di dataset/04_preprocessed/ SUDAH berupa output densenet.preprocess_input. Berikan langsung ke model. JANGAN memanggil preprocess_input lagi.",
+  "imagenet_resize_center_crop": "tidak dipakai (disengaja)",
+  "slice_selection": "geometric_lower_middle -> (n-1)//2",
+  "slice_selection_note": "indeks lebih rendah pada urutan ascending proyeksi ImagePositionPatient onto normal; BUKAN klaim anatomis inferior",
+  "coordinate_convention": "transposed (BBox_X=baris/row, BBox_Y=kolom/column)",
+  "crop_storage": "PNG uint8 grayscale, nilai [0,1] diskalakan ke 0..255",
+  "preprocessed_storage": ".npy float32 (224,224,3) - nilai output preprocess_input apa adanya",
+  "random_seed": null,
+  "random_seed_note": "preprocessing deterministik, tidak ada RNG; Fold dari manifest tidak diubah",
+  "leakage_controls": [
+    "tidak ada oversampling/undersampling",
+    "tidak ada augmentation",
+    "tidak ada normalisasi berbasis statistik global",
+    "tidak ada image selection berdasarkan label",
+    "Fold dipertahankan dari nodule_manifest.csv"
+  ],
+  "counts": {
+    "input": 524,
+    "ok": 524,
+    "failed": 0,
+    "benign": 381,
+    "malignant": 143
+  },
+  "library_versions": {
+    "python": "3.12.10",
+    "numpy": "2.2.6",
+    "pandas": "2.2.3",
+    "pydicom": "3.0.1",
+    "scikit-image": "0.24.0",
+    "matplotlib": "3.9.4",
+    "scikit-learn": "1.6.1",
+    "tensorflow": "2.21.0",
+    "keras": "3.15.1"
+  }
+}

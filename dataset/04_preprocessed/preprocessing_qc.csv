@@ -1,0 +1,21 @@
+cek,status,detail
+jumlah input manifest penuh,OK,524
+jumlah output = jumlah input penuh,OK,524/524
+tidak ada sample duplikat di manifest,OK,0
+setiap NoduleClusterID punya tepat 1 output,OK,1
+semua Fold tetap 1..5,OK,"[1, 2, 3, 4, 5]"
+distribusi label sesuai input (381/143),OK,"input {0: 381, 1: 143} -> output {0: 381, 1: 143}"
+LabelBinary hanya 0/1,OK,"[0, 1]"
+tidak ada NaN pada model input,OK,0
+tidak ada Inf pada model input,OK,0
+tidak ada crop kosong,OK,0
+kanal 1/2/3 identik (replikasi),OK,0
+dtype model input float32,OK,['float32']
+semua CropPath ada,OK,hilang 0
+semua PreprocessedPath ada,OK,hilang 0
+semua path relatif,OK,absolut/backslash 0 []
+tidak ada file crop tanpa manifest,OK,yatim 0
+tidak ada file preprocessed tanpa manifest,OK,yatim 0
+margin seragam di semua sample,OK,[5.0]
+tidak ada crop ter-clipping,OK,0 sample ter-clipping
+"shape .npy (224,224,3) float32 [40 dicek]",OK,shape salah 0
