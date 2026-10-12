@@ -31,7 +31,7 @@ dataset/raw/
 
 # Generated dataset
 dataset/03_crops/
-dataset/04_preprocessed/
+# dataset/04_preprocessed/
 
 # Temporary files
 dataset/tmp/
@@ -41,7 +41,7 @@ dataset/temp/
 models/
 
 # Results
-results/
+# results/
 
 # Logs
 logs/
